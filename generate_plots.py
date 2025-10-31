@@ -200,26 +200,19 @@ if df is not None and not df.empty:
             gridcolor='rgba(230, 230, 230, 0.5)',
             range=[0, 100],
             ticksuffix="%",
-            dtick=50,
-            fixedrange=False,
-            autorange=False
+            dtick=50
         ),
         xaxis=dict(
             gridcolor='rgba(230, 230, 230, 0.5)',
-            range=[1, 150],
-            fixedrange=False,
-            autorange=False
+            range=[1, 150]
         ),
         showlegend=False,
-        autosize=True,
-        width=None,
-        height=None
+        autosize=True
     )
     fig3.write_html("plot3.html", include_plotlyjs='cdn', full_html=False, config={
         'displayModeBar': True, 
         'displaylogo': False,
-        'modeBarButtonsToRemove': ['autoScale2d', 'resetScale2d'],
-        'doubleClick': 'reset'
+        'doubleClick': 'autosize'
     })
     print("Generated plot3.html")
 
