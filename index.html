@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3: Pokémon Diversity Crisis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Why Do Competitive Players Keep Using the Same 50 Pokémon?</h1>
+        <p class="subtitle">
+            With over 1,000 Pokémon available, why do competitive players use the same small subset
+            repeatedly?
+        </p>
+    </header>
+
+    <main>
+        <section>
+            <h2>The Problem</h2>
+            <p>Pokémon has been around for almost 30 years, and the roster keeps growing. We're at the point where there are literally more than a thousand different Pokémon you could put on your team. You'd think competitive battles would be this wild mix of different strategies and surprise picks, right?</p>
+            <p><strong>Wrong.</strong></p>
+            <p>When I dug into the competitive usage data from August 2025, I found something pretty shocking. Out of all those options, just 50 Pokémon make up most of what you'll see in competitive play. The top 10 alone show up in almost every single match. This is the story of a "diversity crisis."</p>
+        </section>
+
+        <section class="chart-container">
+            <h3>1. The Cliff: Usage Drops Dramatically</h3>
+            <p>This first chart shows the usage rate for the top 50 most popular Pokémon. Notice how it drops off a cliff. The most-used Pokémon shows up in over 27% of teams, but by rank 50, we're already below 5% usage.</p>
+            <div class="iframe-embed">
+                <iframe src="plot1.html" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+        <section class="chart-container">
+            <h3>2. The Usual Suspects: The Top 20</h3>
+            <p>Looking at <em>who</em> makes the top of the list tells us a lot. These aren't just fan favorites; they are the meta (the most effective tactics available). Notice the colors—they represent the Pokémon's primary type. Steel (grey) and Ground (brown) are everywhere, valued for their powerful defensive and offensive properties.</p>
+            <div class="iframe-embed" style="height: 500px;">
+                <iframe src="plot2.html" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+        <section class="chart-container">
+            <h3>3. The Concentration Problem</h3>
+            <p>This chart reveals the brutal reality of the "oligopoly" in competitive Pokémon. The entire game is dominated by a tiny, elite group. The data shows that <strong>just 15 Pokémon make up 50% of all usage</strong>. You need over 70 Pokémon just to account for 90% of the meta, leaving hundreds of others in the dust.</p>
+            <div class="iframe-embed">
+                <iframe src="plot3.html" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+        <section class="chart-container">
+            <h3>4. Which Types Dominate the Meta?</h3>
+            <p>It's not just <em>which</em> Pokémon, but <em>what kind</em>. The top 50 Pokémon are heavily biased toward a few key types, creating a cycle where only the types that can <em>beat</em> these types (or join them) can succeed. Steel, Ground, and Dragon are the clear winners, while types like Ice and Bug have zero appearances.</p>
+            <div class="iframe-embed" style="height: 500px;">
+                <iframe src="plot4.html" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+        <section class="chart-container">
+            <h3>5. The Diversity Crisis, Visualized</h3>
+            <p>This is the story's punchline. When you categorize the entire roster by usage, the problem becomes undeniable. A tiny "Elite" group of 15 Pokémon is used more than 10% of the time, while a massive "Rare" graveyard of <strong>over 650 Pokémon</strong> shows up in less than 1% of matches. They might as well not exist in competitive play.</p>
+            <div class="iframe-embed" style="height: 400px;">
+                <iframe src="plot5.html" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+        <section>
+            <h2>Why Should Anyone Care?</h2>
+            <p>This isn't just about a video game. This same pattern shows up in any competitive environment.</p>
+            <ul>
+                <li><strong>For Players:</strong> It's frustrating. You might love a Pokémon, but if it's not in that top tier, using it means you're basically choosing to lose.</li>
+                <li><strong>For Designers:</strong> It's a nightmare. Imagine spending months designing and animating a new Pokémon, only for it to see 0.01% usage because it can't compete.</li>
+                <li><strong>For Viewers:</strong> It's boring. When every match features the same Pokémon making the same plays, why tune in?</li>
+            </ul>
+            <p>When winning is on the line, players will always optimize the fun out of the game. That's not a bug; it's human nature. But when you see that 950+ Pokémon are essentially decorative in competitive play... you have to wonder: <strong>what's the point of catching them all?</strong></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Seifedeen Asfar. Data from Smogon University (August 2025).</p>
+    </footer>
+</body>
+</html>
