@@ -4,10 +4,8 @@ import plotly.graph_objects as go
 import plotly.io as pio
 from collections import Counter
 
-# Set default template for a clean look
 pio.templates.default = "plotly_white"
 
-# --- Data & Colors (from your Tech Report) ---
 pokemon_types = {
     'Great Tusk': ['Ground', 'Fighting'], 'Kingambit': ['Dark', 'Steel'],
     'Gholdengo': ['Steel', 'Ghost'], 'Dragonite': ['Dragon', 'Flying'],
@@ -30,7 +28,6 @@ type_colors = {
     'Ice': '#98D8D8', 'Bug': '#A8B820', 'Normal': '#A8A878'
 }
 
-# --- Data Parsing (from your Tech Report) ---
 def parse_smogon_data(filepath):
     """Parse the Smogon usage stats text file"""
     data = []
@@ -63,7 +60,6 @@ def parse_smogon_data(filepath):
         
     return pd.DataFrame(data)
 
-# --- Load and Process Data ---
 df = parse_smogon_data('gen9ou-0.txt')
 
 if df is not None and not df.empty:
@@ -94,7 +90,6 @@ if df is not None and not df.empty:
         hovertext=df_top50['name'],
         hovertemplate='<b>%{hovertext}</b><br>Rank: %{x}<br>Usage: %{y:.1f}%<extra></extra>'
     ))
-    # Annotations - both above the line with matching arrow colors
     fig1.add_annotation(
         x=1, y=df.iloc[0]['usage_percent'],
         text=f"<b>#1: {df.iloc[0]['usage_percent']:.1f}%</b><br>{df.iloc[0]['name']}",
@@ -128,18 +123,16 @@ if df is not None and not df.empty:
         
         if pd.notna(row['type2']):
             color2 = type_colors.get(row['type2'], '#808080')
-            # Convert hex color to rgba with reduced opacity for the border
-            # Extract RGB from hex
-            color2_rgb = tuple(int(color2.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))
-            color2_rgba = f'rgba({color2_rgb[0]}, {color2_rgb[1]}, {color2_rgb[2]}, 0.5)'  # 50% opacity
             
-            # For dual types: thick colored border to show secondary type
+            color2_rgb = tuple(int(color2.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))
+            color2_rgba = f'rgba({color2_rgb[0]}, {color2_rgb[1]}, {color2_rgb[2]}, 0.5)'
+            
             fig2.add_trace(go.Bar(
                 x=[row['name']],
                 y=[row['usage_percent']],
                 marker=dict(
                     color=color1,
-                    line=dict(color=color2_rgba, width=4)  # Thick border with reduced opacity
+                    line=dict(color=color2_rgba, width=4)
                 ),
                 text=[round(row['usage_percent'], 1)],
                 textposition='outside',
@@ -149,7 +142,6 @@ if df is not None and not df.empty:
                 width=0.7
             ))
         else:
-            # Single type: solid color, no border
             fig2.add_trace(go.Bar(
                 x=[row['name']],
                 y=[row['usage_percent']],
@@ -169,7 +161,7 @@ if df is not None and not df.empty:
         xaxis_tickangle=-45,
         margin=dict(t=30, b=40, l=40, r=20),
         font=dict(family="Lato, sans-serif"),
-        yaxis=dict(range=[0, top_20['usage_percent'].max() * 1.15]) # Add space for labels
+        yaxis=dict(range=[0, top_20['usage_percent'].max() * 1.15]) 
     )
     fig2.write_html("plot2.html", include_plotlyjs='cdn', full_html=False)
     print("Generated plot2.html")
@@ -178,7 +170,6 @@ if df is not None and not df.empty:
     fig3 = go.Figure()
     df_top150 = df.iloc[:150]
     
-    # Main curve with gradient fill
     fig3.add_trace(go.Scatter(
         x=df_top150['rank'], 
         y=df_top150['cumulative_percent'],
@@ -190,7 +181,6 @@ if df is not None and not df.empty:
         hovertemplate='<b>Top %{x} Pokémon</b><br>Account for %{y:.1f}% of all usage<extra></extra>'
     ))
     
-    # Add subtle reference lines at 25%, 50%, 75%
     for pct in [25, 50, 75]:
         fig3.add_hline(
             y=pct, 
@@ -210,18 +200,21 @@ if df is not None and not df.empty:
             gridcolor='rgba(230, 230, 230, 0.5)',
             range=[0, 100],
             ticksuffix="%",
-            dtick=50
+            dtick=50,
+            fixedrange=False
         ),
         xaxis=dict(
-            gridcolor='rgba(230, 230, 230, 0.5)'
+            gridcolor='rgba(230, 230, 230, 0.5)',
+            range=[0, 150],
+            fixedrange=False
         ),
-        showlegend=False
+        showlegend=False,
+        autosize=True
     )
-    fig3.write_html("plot3.html", include_plotlyjs='cdn', full_html=False)
+    fig3.write_html("plot3.html", include_plotlyjs='cdn', full_html=False, config={'displayModeBar': True, 'displaylogo': False})
     print("Generated plot3.html")
 
     # --- Visualization 4: Type Distribution ---
-    # [Based on: 186-208]
     type_counts = Counter()
     for _, row in df.head(50).iterrows(): 
         if pd.notna(row['type1']):
@@ -248,13 +241,12 @@ if df is not None and not df.empty:
         xaxis_title="Pokémon Type",
         margin=dict(t=30, b=40, l=40, r=20),
         font=dict(family="Lato, sans-serif"),
-        yaxis=dict(range=[0, max(counts) * 1.15]) # Add space for labels
+        yaxis=dict(range=[0, max(counts) * 1.15]) 
     )
     fig4.write_html("plot4.html", include_plotlyjs='cdn', full_html=False)
     print("Generated plot4.html")
 
     # --- Visualization 5: Usage Tiers ---
-    # [Based on: 210-230]
     usage_tiers = [
         ('Elite (>10%)', len(df[df['usage_percent'] >= 10]), '#FF4444'), 
         ('High (5-10%)', len(df[(df['usage_percent'] >= 5) & (df['usage_percent'] < 10)]), '#FF8844'), 
