@@ -198,7 +198,7 @@ if df is not None and not df.empty:
         plot_bgcolor='white',
         yaxis=dict(
             gridcolor='rgba(230, 230, 230, 0.5)',
-            range=[0, 105],
+            range=[0, 550],
             ticksuffix="%",
             dtick=50
         ),
