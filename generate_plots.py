@@ -198,22 +198,16 @@ if df is not None and not df.empty:
         plot_bgcolor='white',
         yaxis=dict(
             gridcolor='rgba(230, 230, 230, 0.5)',
-            range=[0, 100],
+            range=[0, 105],
             ticksuffix="%",
             dtick=50
         ),
         xaxis=dict(
-            gridcolor='rgba(230, 230, 230, 0.5)',
-            range=[1, 150]
+            gridcolor='rgba(230, 230, 230, 0.5)'
         ),
-        showlegend=False,
-        autosize=True
+        showlegend=False
     )
-    fig3.write_html("plot3.html", include_plotlyjs='cdn', full_html=False, config={
-        'displayModeBar': True, 
-        'displaylogo': False,
-        'doubleClick': 'autosize'
-    })
+    fig3.write_html("plot3.html", include_plotlyjs='cdn', full_html=False)
     print("Generated plot3.html")
 
     # --- Visualization 4: Type Distribution ---
